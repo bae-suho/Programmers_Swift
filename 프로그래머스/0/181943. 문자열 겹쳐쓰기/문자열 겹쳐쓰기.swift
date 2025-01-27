@@ -1,11 +1,9 @@
 import Foundation
 
 func solution(_ my_string:String, _ overwrite_string:String, _ s:Int) -> String {
-    var result = Array(my_string)
-    let overwrite = Array(overwrite_string)
-    
-    for i in 0..<overwrite_string.count {
-        result[i+s] = overwrite[i]
-    }
-    return String(result)
+    var result = my_string
+    let startIndex = result.index(result.startIndex, offsetBy: s)
+    let endIndex = result.index(startIndex, offsetBy: overwrite_string.count)
+    result.replaceSubrange(startIndex..<endIndex, with: overwrite_string)
+    return result
 }
