@@ -2,11 +2,5 @@ import Foundation
 
 func solution(_ numLog:[Int]) -> String {
     let op: [Int: String] = [1: "w", -1: "s", 10: "d", -10: "a"]
-    var prev = numLog[0]
-    var ret = ""
-    for i in 1..<numLog.count {
-        ret.append(op[numLog[i] - prev]!)
-        prev = numLog[i]
-    }
-    return ret
+    return (1...numLog.count-1).map{ op[numLog[$0] - numLog[$0 - 1]]! }.joined()
 }
