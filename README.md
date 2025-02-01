@@ -7,9 +7,10 @@ Swift 코딩 테스트 준비를 위한 연습 문제 풀이와 학습 자료입
 
 ### 코딩 기초 트레이닝
 - 총 문제: 124문제
-- 해결한 문제 중 오래 걸렸던 문제:
+- 더 좋은 풀이가 있는 문제:
   - **181943. 문자열 겹쳐쓰기**
   - **181942. 문자열 섞기**
+  - **181926. 수 조작하기 1**
 ---
 
 ## 181943. 문자열 겹쳐쓰기
@@ -92,4 +93,45 @@ func solution(_ str1:String, _ str2:String) -> String {
 - 두 가지 방식의 장단점 비교:
   - 배열 방식: 직관적이고 이해하기 쉬우나 배열 변환과 반복문으로 코드가 길어질 수 있음.
   - `zip` 변환 방식: 고차 함수를 이용해 간결하고 깔끔한 코드 작성 가능, 코드가 더 효율적이고 짧음.
+---
 
+## 181926. 수 조작하기 1
+
+### 내 풀이
+
+```swift
+func solution(_ n:Int, _ control:String) -> Int {
+    var ret = n
+    for c in control {
+        switch c {
+            case "w" : ret += 1
+            case "s" : ret += -1
+            case "d" : ret += 10
+            case "a" : ret += -10
+            default : return 0;
+        }
+    }
+    return ret
+}
+```
+
+### 다른 풀이: `Dictionary` 사용
+
+```swift
+func solution(_ n:Int, _ control:String) -> Int {
+    let op: [Character: Int] = ["w": 1, "s": -1, "d": 10, "a": -10]
+    return control.map{ op[$0]! }.reduce(n, +)
+}
+```
+### 코드 해설:
+- op: [Character: Int]: 문자와 조작값을 딕셔너리 형태로 저장하여 효율적으로 조회합니다.
+- control.map { op[$0]! }: control 문자열의 각 문자를 op에서 대응하는 값으로 변환합니다.
+- .reduce(n, +): n을 초기값으로 설정하고 변환된 값을 누적하여 최종 결과를 반환합니다.
+
+### 학습 포인트
+
+- Dictionary를 활용하면 switch 문보다 간결하고 효율적으로 값을 매핑할 수 있습니다.
+- 두 가지 방식의 장단점 비교:
+    - switch 문 방식: 직관적이지만, 조건 분기가 많아질 경우 코드가 길어질 수 있음.
+    - Dictionary 방식: map과 reduce를 활용하여 코드가 간결해지지만, 존재하지 않는 키를 강제 언래핑(!)할 경우 런타임 오류 발생 가능.
+---
