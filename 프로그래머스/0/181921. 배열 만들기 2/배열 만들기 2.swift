@@ -8,8 +8,5 @@ func solution(_ l:Int, _ r:Int) -> [Int] {
             ret.append(num)
         }
     }
-    if ret == [] {
-        ret.append(-1)
-    }
-    return ret
+    return ret != [] ? ret : [-1]
 }
