@@ -1,6 +1,3 @@
-// 5 21
-// 5 6 7 8 9
-
 let input = readLine()!.split(separator: " ").map{Int($0)!}
 let (n, m) = (input[0], input[1])
 let cards = readLine()!.split(separator: " ").map{Int($0)!}
@@ -16,8 +13,7 @@ for i in 0..<(n-2) {
             }
             else if result < sum && sum <= m {
                 result = sum    
-                } 
-            
+            } 
         }
     }
 }
